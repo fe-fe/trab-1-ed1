@@ -89,9 +89,9 @@ cantina.exe
 [ Aluno 1 ] -> [ Aluno 2 ] -> ... -> [ Aluno N ]
 ```
 
-#### 🟦 Fila de Reposição de Produtos
+#### 🟦 Lista de Reposição de Produtos
 - **Tipo**: Lista Circular Encadeada
-- **Justificativa**: Estrutura ideal para FIFO. Permite inserções e remoções eficientes no ciclo de reposição.
+- **Justificativa**: Estrutura ideal para Reposição. Permite inserções e remoções eficientes no ciclo de reposição e facilita o gerenciamento. Requisitada pelo Professor.
 ```
     +--------+       +--------+
     |ProdutoA| ----> |ProdutoB| --+
@@ -139,6 +139,7 @@ cantina.exe
 - ✔️ **Vetor dinâmico** para produtos: flexível e eficiente para listagens e buscas.
 - ✔️ **Lista circular encadeada** para fila de reposição: operações rápidas de inserção e remoção, sem necessidade de reorganizar memória.
 - ✔️ **Limite de 5 itens por aluno/dia**: ajuda no controle de consumo e simula regra prática.
+- ✔️ **Controle de Reposição automatica** insere produtos com menos de 10 unidades disponiveis na lista de reposição automaticamente.
 - ✔️ Uso de modularização com `.c` e `.h` para clareza e reusabilidade do código.
 
 ---
@@ -150,15 +151,6 @@ cantina.exe
 > Entendemos que listas estáticas são úteis para prototipagem, mas optamos por usar estruturas dinâmicas nos casos em que flexibilidade era crucial (como no catálogo de produtos).
 
 > A simulação de um sistema real, com múltiplos arquivos e integração entre módulos, nos ajudou a consolidar a importância da organização do código, da separação de responsabilidades e da documentação clara.
-
----
-
-## ✅ Possíveis Melhorias Futuras
-
-- Substituir listas estáticas por dinâmicas nos módulos de alunos e vendas.
-- Implementar persistência em arquivos para salvar produtos e vendas.
-- Adicionar autenticação de usuários (login/senha).
-- Implementar interface gráfica ou web com bibliotecas externas.
 
 ---
 
