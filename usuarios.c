@@ -12,7 +12,7 @@ int cadastrarAluno(ListaAlunos* lista, char* nome, int matricula) {
     if (lista->quantidade >= MAX_USUARIOS) return 0;
 
     if (buscarAluno(lista, matricula) != NULL) {
-        printf("Matricula ja cadastrada.\n");
+        printf("Matricula ja cadastrada.");
         return 0;
     }
 
@@ -34,7 +34,16 @@ Aluno* buscarAluno(ListaAlunos* lista, int matricula) {
 
 // Mostra todos os alunos
 void listarAlunos(ListaAlunos* lista) {
+    //                                    .
+    printf("\n======= LISTA DE ALUNOS =======\n");
+
+    if (lista->quantidade == 0 || lista == NULL) {
+        printf("Lista de alunos invalida ou vazia\n");
+    }
+
     for (int i = 0; i < lista->quantidade; i++) {
         printf("[%d] %s\n", lista->lista[i].matricula, lista->lista[i].nome);
     }
+
+    printf("================================\n");
 }

@@ -39,6 +39,9 @@ int realocarCatalogo(CatalogoProdutos* catalogo) {
 
 
 int cadastrarProduto(CatalogoProdutos* catalogo, char* nome, Categoria categoria, int codigo, int estoque) {
+
+    printf("\n");
+
     // verifica se o catalogo eh valido
     if (catalogo == NULL) {
         printf("Catalogo invalido");
@@ -70,6 +73,7 @@ int cadastrarProduto(CatalogoProdutos* catalogo, char* nome, Categoria categoria
 
     catalogo->listaProdutos[catalogo->tamanho] = novoProduto;
     catalogo->tamanho++;
+
     return 1;
 }
 
@@ -127,13 +131,19 @@ void visualizarProduto(Produto produto) {
 
 
 void visualizarCatalogo(CatalogoProdutos* catalogo) {
+
+    printf("\n======== CATALOGO DE PRODUTOS ========\n");
+
     if (catalogo == NULL || catalogo->tamanho == 0) {
         printf("catalogo invalido ou vazio");
+        printf("\n======================================\n");
         return;
     }
     for (int i = 0; i < catalogo->tamanho; i++) {
         visualizarProduto(catalogo->listaProdutos[i]);
     }
+
+    printf("======================================\n");
 }
 
 const char* nomeCategoria(Categoria categoria) {

@@ -42,6 +42,9 @@ int desenfileirar(FilaReposicao* fila) {
 
 // Mostra todos os itens da fila
 void exibirFila(FilaReposicao* fila) {
+
+    printf("\n==== FILA DE REPOSICAO ====\n");
+
     if (fila->fim == NULL) {
         printf("Fila de reposicao vazia.\n");
         return;
@@ -52,4 +55,6 @@ void exibirFila(FilaReposicao* fila) {
         printf("Produto cod: %d\n", atual->codigoProduto);
         atual = atual->prox;
     } while (atual != fila->fim->prox);
+
+    printf("============================\n");
 }

@@ -26,39 +26,48 @@ int registrarVenda(
     Produto* produto = buscarProduto(catalogo, codigoProduto);
 
     if (aluno == NULL || produto == NULL) {
-        printf("Aluno ou produto inexistente.\n");
+        printf("Erro: Aluno ou produto inexistente.\n");
         return 0;
     }
 
     int jaComprados = itensCompradosHoje(controle, matricula);
     if (jaComprados + quantidade > 5) {
-        printf("Limite diario de 5 itens excedido!\n");
+        printf("Aviso: Limite diario de 5 itens excedido!\n");
         return 0;
     }
 
     if (produto->estoque < quantidade) {
-        printf("Estoque insuficiente. Produto adicionado à fila de reposição.\n");
+        printf("Aviso: Estoque insuficiente. Produto adicionado à fila de reposição.\n");
         enfileirar(fila, codigoProduto);
         return 0;
     }
 
     produto->estoque -= quantidade;
 
+    if (produto->estoque == 0) {
+        printf("Aviso: ultima unidade do estoque vendida.\nProduto adicionado à fila de reposição.\n");
+        enfileirar(fila, codigoProduto);
+    }
+
     Venda v = {matricula, codigoProduto, quantidade};
     controle->historico[controle->totalVendas++] = v;
 
     return 1;
+
 }
 
 // Mostra todas as vendas de um aluno
 void relatorioVendasAluno(ControleVendas* controle, ListaAlunos* alunos, int matricula) {
     Aluno* aluno = buscarAluno(alunos, matricula);
+
+    
+    
     if (!aluno) {
         printf("Aluno nao encontrado.\n");
         return;
     }
 
-    printf("Relatorio de vendas do aluno %s:\n", aluno->nome);
+    printf("Relatorio de vendas do(a) aluno(a) %s:\n", aluno->nome);
     for (int i = 0; i < controle->totalVendas; i++) {
         if (controle->historico[i].matriculaAluno == matricula) {
             printf("Produto %d - %d unidades\n",
@@ -66,4 +75,5 @@ void relatorioVendasAluno(ControleVendas* controle, ListaAlunos* alunos, int mat
                    controle->historico[i].quantidade);
         }
     }
+
 }
