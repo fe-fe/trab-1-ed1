@@ -2,7 +2,7 @@
 
 **Trabalho Prático I – Estrutura de Dados Linear com Interface de Aplicação**  
 📚 **Disciplina**: Estrutura de Dados  
-👨‍🏫 **Professor(a)**: [Nome do professor(a)]
+👨‍🏫 **Professor(a)**: Dr. Helcio Soares Padilha Junior.
 
 ---
 
