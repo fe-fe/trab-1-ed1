@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 #include "produto.h"
-
+#include "lista.h"
 
 CatalogoProdutos* iniciarCatalogo() {
     CatalogoProdutos* novoCatalogo = (CatalogoProdutos*) malloc(sizeof(CatalogoProdutos));
@@ -38,7 +38,7 @@ int realocarCatalogo(CatalogoProdutos* catalogo) {
 }
 
 
-int cadastrarProduto(CatalogoProdutos* catalogo, char* nome, Categoria categoria, int codigo, int estoque) {
+int cadastrarProduto(CatalogoProdutos* catalogo, ListaReposicao* listaRep, char* nome, Categoria categoria, int codigo, int estoque) {
 
     printf("\n");
 
@@ -63,6 +63,12 @@ int cadastrarProduto(CatalogoProdutos* catalogo, char* nome, Categoria categoria
     if (buscarProduto(catalogo, codigo) != NULL) {
         printf("Esse codigo ja foi cadastrado no catalogo!\n");
         return 0;
+    }
+
+    if (estoque < 10) {
+        printf("Aviso: Produto com estoque baixo\n");
+        printf("Aviso: Produto adicionado a lista de reposicao\n");
+        inserirProdutoReposicao(listaRep, codigo, nome);
     }
 
     Produto novoProduto;
@@ -154,4 +160,21 @@ const char* nomeCategoria(Categoria categoria) {
         case CHOCOLATE: return "Chocolate";
         default: return "Desconhecido";
     }
+}
+
+int reporEstoque(CatalogoProdutos* catalogo, ListaReposicao* listaRep, int codigoProduto, int quantidade) {
+
+    Produto* produto = buscarProduto(catalogo, codigoProduto); // busca um produto pelo codigo recebido
+    if (produto == NULL) { // se nao encontrar nenhum produto
+        printf("produto invalido"); // 
+        return 0; // avisa o erro e retorna 0; estoque do produto nao reposto
+    }
+    // produto foi encontrado
+    printf("Estoque do produto reposto:\n");
+    produto->estoque += quantidade; // repor estoque
+    if (produto->estoque - quantidade < 10 && produto->estoque > 10) {
+        removerProdutoReposicao(listaRep, codigoProduto);
+    }
+    visualizarProduto(*produto); // printar produto
+    return 1;
 }

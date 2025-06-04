@@ -1,25 +1,29 @@
 #ifndef LISTA_CIRCULAR_H
 #define LISTA_CIRCULAR_H
 
-typedef struct No {
-    int codigoProduto;
-    struct No* prox;
-} No;
+// Estrutura do nó
+typedef struct NoRep {
+    int codigo;
+    char* nome;
+    struct NoRep* prox;
+} NoRep;
 
-typedef struct {
-    No* fim;
-} FilaReposicao;
+typedef struct ListaReposicao {
+    NoRep* fim;
+} ListaReposicao;
 
 // Inicializa a fila circular
-void iniciarFila(FilaReposicao* fila);
+void iniciarListaReposicao(ListaReposicao* fila);
 
 // Enfileira um produto para reposição
-void enfileirar(FilaReposicao* fila, int codigoProduto);
+void inserirProdutoReposicao(ListaReposicao* lista, int codigo, const char* nome);
 
 // Desenfileira o próximo produto
-int desenfileirar(FilaReposicao* fila);
+int removerProdutoReposicao(ListaReposicao* lista, int codigo);
 
 // Mostra todos os itens na fila
-void exibirFila(FilaReposicao* fila);
+void exibirListaReposicao(ListaReposicao* lista);
+
+void liberarLista(ListaReposicao* lista);
 
 #endif

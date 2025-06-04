@@ -1,60 +1,89 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
 #include "lista.h"
 
-// Inicia fila vazia
-void iniciarFila(FilaReposicao* fila) {
-    fila->fim = NULL;
+void iniciarListaReposicao(ListaReposicao* lista) {
+    lista->fim = NULL;
 }
 
-// Enfileira novo produto
-void enfileirar(FilaReposicao* fila, int codigoProduto) {
-    No* novo = (No*) malloc(sizeof(No));
-    novo->codigoProduto = codigoProduto;
+void inserirProdutoReposicao(ListaReposicao* lista, int codigo, const char* nome) {
+    NoRep* novo = (NoRep*) malloc(sizeof(NoRep));
+    novo->codigo = codigo; // insere os atributos do produto no no
+    novo->nome = strdup(nome); 
 
-    if (fila->fim == NULL) {
-        novo->prox = novo;
-        fila->fim = novo;
-    } else {
-        novo->prox = fila->fim->prox;
-        fila->fim->prox = novo;
-        fila->fim = novo;
+    if (lista->fim == NULL) { // se a lista estiver vazia
+        novo->prox = novo; // insere o novo no como primeiro e ultimo elemento
+        lista->fim = novo;
+    } else { // se nao estiver vazia
+        novo->prox = lista->fim->prox; // atualiza o proximo do novo no para o primeiro elemento
+        lista->fim->prox = novo; // atualiza o ponteiro do antigo ultimo no para o novo no
+        lista->fim = novo; // atualiza o ponteiro que controla o ultimo no
     }
 }
 
-// Remove produto do início da fila
-int desenfileirar(FilaReposicao* fila) {
-    if (fila->fim == NULL) return -1;
 
-    No* inicio = fila->fim->prox;
-    int codigo = inicio->codigoProduto;
+int removerProdutoReposicao(ListaReposicao* lista, int codigo) {
+    if (lista->fim == NULL) return 0; // verifica se a lista nao esta vazia
 
-    if (inicio == fila->fim) {
-        free(inicio);
-        fila->fim = NULL;
-    } else {
-        fila->fim->prox = inicio->prox;
-        free(inicio);
-    }
+    NoRep* atual = lista->fim->prox;
+    NoRep* anterior = lista->fim;
 
-    return codigo;
+    do {
+        if (atual->codigo == codigo) {
+            if (atual == anterior) {  // Só um elemento
+                lista->fim = NULL;
+            } else {
+                anterior->prox = atual->prox;
+                if (atual == lista->fim) {
+                    lista->fim = anterior;  // Atualiza fim
+                }
+            }
+            free(atual->nome);
+            free(atual);
+            return 1;  // Sucesso
+        }
+        anterior = atual;
+        atual = atual->prox;
+    } while (atual != lista->fim->prox);
+
+    return 0;  // Código não encontrado
 }
 
-// Mostra todos os itens da fila
-void exibirFila(FilaReposicao* fila) {
 
-    printf("\n==== FILA DE REPOSICAO ====\n");
+void exibirListaReposicao(ListaReposicao* lista) {
+    printf("\n=== LISTA DE REPOSICAO ===\n");
 
-    if (fila->fim == NULL) {
-        printf("Fila de reposicao vazia.\n");
+    if (lista->fim == NULL) {
+        printf("Nenhum produto na lista de reposicao.\n");
         return;
     }
 
-    No* atual = fila->fim->prox;
+    NoRep* atual = lista->fim->prox;
     do {
-        printf("Produto cod: %d\n", atual->codigoProduto);
+        printf("Código: %d | Nome: %s\n", atual->codigo, atual->nome);
         atual = atual->prox;
-    } while (atual != fila->fim->prox);
+    } while (atual != lista->fim->prox);
 
-    printf("============================\n");
+    printf("===========================\n");
+}
+
+
+void liberarLista(ListaReposicao* lista) {
+
+    // libera a lista de reposiscao, no por no
+    if (lista->fim == NULL) return;
+
+    NoRep* atual = lista->fim->prox;
+    NoRep* proxNo;
+
+    do {
+        proxNo = atual->prox;
+        free(atual->nome);
+        free(atual);
+        atual = proxNo;
+    } while (atual != lista->fim->prox);
+
+    lista->fim = NULL;
 }

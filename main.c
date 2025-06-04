@@ -12,11 +12,11 @@ int main() {
     CatalogoProdutos* catalogo = iniciarCatalogo();
     ListaAlunos alunos;
     ControleVendas vendas;
-    FilaReposicao fila;
+    ListaReposicao listaRep;
 
     iniciarListaAlunos(&alunos);
     iniciarControleVendas(&vendas);
-    iniciarFila(&fila);
+    iniciarListaReposicao(&listaRep);
 
     // Produtos de exemplo cadastrados inicialmente
     //cadastrarProduto(catalogo, "HERSHEYS COM NOZES", CHOCOLATE, 001, 10);
@@ -30,13 +30,10 @@ int main() {
 
     do {
         printf("\n===== MENU PRINCIPAL =====\n");
-        printf("1. Cadastrar Produto\n");
-        printf("2. Visualizar Produtos\n");
-        printf("3. Cadastrar Aluno\n");
-        printf("4. Listar Alunos\n");
-        printf("5. Registrar Venda\n");
-        printf("6. Relatorio de Vendas por Aluno\n");
-        printf("7. Mostrar Fila de Reposicao\n");
+        printf("1. Cadastrar Produto   ::: 5. Registrar Venda\n");
+        printf("2. Visualizar Produtos ::: 6. Relatorio de Vendas por Aluno\n");
+        printf("3. Cadastrar Aluno     ::: 7. Mostrar Lista de Reposicao\n");
+        printf("4. Listar Alunos       ::: 8. Repor estoque de um Produto\n");
         printf("0. Sair\n");
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
@@ -78,7 +75,7 @@ int main() {
                 printf("Estoque inicial: ");
                 scanf("%d", &estoque);
 
-                if (cadastrarProduto(catalogo, nome, cat, codigo, estoque)) {
+                if (cadastrarProduto(catalogo, &listaRep, nome, cat, codigo, estoque)) {
                     printf("Produto cadastrado com sucesso.");
                 } else {
                     printf("Erro ao cadastrar o produto.");
@@ -139,7 +136,7 @@ int main() {
             printf("Quantidade: ");
             scanf("%d", &quantidade);
 
-            if (registrarVenda(&vendas, &alunos, catalogo, &fila, matricula, codigo, quantidade)) {
+            if (registrarVenda(&vendas, &alunos, catalogo, &listaRep, matricula, codigo, quantidade)) {
                 printf("Venda registrada com sucesso.");
             }
 
@@ -168,8 +165,32 @@ int main() {
             //////////////////////////////
 
         } else if (opcao == 7) {
-            // exibir fila de reposicao
-            exibirFila(&fila);
+            // exibir lista de reposicao
+            exibirListaReposicao(&listaRep);
+        
+        } else if (opcao == 8) {
+            ///////////////////////
+            // ABASTECER PRODUTO //
+            ///////////////////////
+
+            printf("\n=========== REPOR ESTOQUE ===========\n");
+            int codigoProduto, qtd;
+            visualizarCatalogo(catalogo);
+            printf("Codigo do Produto: ");
+            scanf("%d", &codigoProduto);
+            printf("Quantidade: ");
+            scanf("%d", &qtd);
+            
+            if (!reporEstoque(catalogo, &listaRep, codigoProduto, qtd)) {
+                printf("Erro: produto nao encontrado ou catalogo invalido\n");
+            }
+            printf("======================================\n");
+
+            ///////////////////////////
+            // FIM ABASTECER PRODUTO //
+            ///////////////////////////
+
+        
         } else {
             printf("opcao invalida!\n");
         }

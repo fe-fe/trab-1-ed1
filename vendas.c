@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "vendas.h"
+#include "lista.h"
 
 // Inicia o controle de vendas
 void iniciarControleVendas(ControleVendas* controle) {
@@ -20,7 +21,7 @@ int itensCompradosHoje(ControleVendas* controle, int matricula) {
 // Registra uma venda, respeita o limite de 5 itens/dia
 int registrarVenda(
     ControleVendas* controle, ListaAlunos* alunos, CatalogoProdutos* catalogo, 
-    FilaReposicao* fila, int matricula, int codigoProduto, int quantidade
+    ListaReposicao* listaRep, int matricula, int codigoProduto, int quantidade
 ) {
     Aluno* aluno = buscarAluno(alunos, matricula);
     Produto* produto = buscarProduto(catalogo, codigoProduto);
@@ -37,16 +38,16 @@ int registrarVenda(
     }
 
     if (produto->estoque < quantidade) {
-        printf("Aviso: Estoque insuficiente. Produto adicionado à fila de reposição.\n");
-        enfileirar(fila, codigoProduto);
+        printf("Aviso: Estoque insuficiente.\nAviso: Produto adicionado à lista de reposição.\n");
+        inserirProdutoReposicao(listaRep, codigoProduto, produto->nome);
         return 0;
     }
 
     produto->estoque -= quantidade;
 
-    if (produto->estoque == 0) {
-        printf("Aviso: ultima unidade do estoque vendida.\nProduto adicionado à fila de reposição.\n");
-        enfileirar(fila, codigoProduto);
+    if (produto->estoque < 10) {
+        printf("Aviso: Estoque baixo.\nAviso: Produto adicionado à lista de reposição.\n");
+        inserirProdutoReposicao(listaRep, codigoProduto, produto->nome);
     }
 
     Venda v = {matricula, codigoProduto, quantidade};
@@ -58,9 +59,7 @@ int registrarVenda(
 
 // Mostra todas as vendas de um aluno
 void relatorioVendasAluno(ControleVendas* controle, ListaAlunos* alunos, int matricula) {
-    Aluno* aluno = buscarAluno(alunos, matricula);
-
-    
+    Aluno* aluno = buscarAluno(alunos, matricula);    
     
     if (!aluno) {
         printf("Aluno nao encontrado.\n");

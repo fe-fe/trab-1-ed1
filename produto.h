@@ -3,6 +3,8 @@
 
 #define CATALOGO_MAX 100
 
+#include "lista.h"
+
 typedef enum  {
     FRUTA,
     DOCE,
@@ -37,7 +39,7 @@ int realocarCatalogo(CatalogoProdutos* catalogo);
 
 // cadastra um novo produto no catalogo
 // retorno: 1 para cadastro bem sucedido, 0 para erro no cadastro
-int cadastrarProduto(CatalogoProdutos* catalogo, char* nome, Categoria categoria, int codigo, int estoque);
+int cadastrarProduto(CatalogoProdutos* catalogo, ListaReposicao* listaRep, char* nome, Categoria categoria, int codigo, int estoque);
 
 // remove um produto do catalogo
 // retorno: 1 para remocao bem sucedida, 0 para erro na remocao
@@ -54,5 +56,7 @@ void visualizarProduto(Produto produto);
 void visualizarCatalogo(CatalogoProdutos* catalogo);
 
 const char* nomeCategoria(Categoria categoria);
+
+int reporEstoque(CatalogoProdutos* catalogo, ListaReposicao* listaRep, int codigoProduto, int quantidade);
 
 #endif

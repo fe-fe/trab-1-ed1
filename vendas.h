@@ -27,7 +27,7 @@ int itensCompradosHoje(ControleVendas* controle, int matricula);
 // Registra uma venda, atualiza estoque e insere na fila se necessário
 int registrarVenda(
     ControleVendas* controle, ListaAlunos* alunos, CatalogoProdutos* catalogo, 
-    FilaReposicao* fila, int matricula, int codigoProduto, int quantidade
+    ListaReposicao* fila, int matricula, int codigoProduto, int quantidade
 );
 
 // Mostra vendas por aluno
