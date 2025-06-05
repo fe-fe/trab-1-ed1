@@ -38,16 +38,21 @@ int registrarVenda(
     }
 
     if (produto->estoque < quantidade) {
-        printf("Aviso: Estoque insuficiente.\nAviso: Produto adicionado à lista de reposição.\n");
-        inserirProdutoReposicao(listaRep, codigoProduto, produto->nome);
-        return 0;
+        printf("Aviso: Estoque insuficiente.\n");
+        if (!estaNaListaReposicao(listaRep, codigoProduto)) {
+            printf("Produto Adicionado a Lista de Reposicao.\n");
+            inserirProdutoReposicao(listaRep, codigoProduto, produto->nome);
+        }
     }
 
     produto->estoque -= quantidade;
 
     if (produto->estoque < 10) {
-        printf("Aviso: Estoque baixo.\nAviso: Produto adicionado à lista de reposição.\n");
-        inserirProdutoReposicao(listaRep, codigoProduto, produto->nome);
+        printf("Aviso: Estoque baixo.\n");
+        if (!estaNaListaReposicao(listaRep, codigoProduto)) {
+            printf("Produto Adicionado a Lista de Reposicao.\n");
+            inserirProdutoReposicao(listaRep, codigoProduto, produto->nome);
+        }
     }
 
     Venda v = {matricula, codigoProduto, quantidade};
