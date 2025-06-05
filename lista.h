@@ -26,4 +26,6 @@ void exibirListaReposicao(ListaReposicao* lista);
 
 void liberarLista(ListaReposicao* lista);
 
+int estaNaListaReposicao(ListaReposicao* lista, int codigo);
+
 #endif
