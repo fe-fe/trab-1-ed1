@@ -8,7 +8,30 @@ void iniciarListaReposicao(ListaReposicao* lista) {
     lista->fim = NULL;
 }
 
+
+int estaNaListaReposicao(ListaReposicao* lista, int codigo) {
+
+    if (lista->fim == NULL) {
+        return 0; // se a lista esta vazia
+    }
+
+    NoRep* atual = lista->fim->prox; // declara o primeiro no
+    do { // enquanto nao der um loop completo
+        if (atual->codigo == codigo) { // verifica se o codigo do produto eh o solicitado
+            return 1; // return 1 (sim, esta na lista)
+        }
+        atual = atual->prox; // se nao for, passa pro proximo no
+    } while (atual != lista->fim->prox); // condicao do loop
+    return 0; // loop completo, poduto nao encontrado
+}
+
+
 void inserirProdutoReposicao(ListaReposicao* lista, int codigo, const char* nome) {
+    
+    if (estaNaListaReposicao(lista, codigo)) { // se o produto ja esta na lista, nao precisa adicionar de novo
+        return;
+    }
+    
     NoRep* novo = (NoRep*) malloc(sizeof(NoRep));
     novo->codigo = codigo; // insere os atributos do produto no no
     novo->nome = strdup(nome); 
