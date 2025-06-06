@@ -31,7 +31,7 @@ Desenvolver um sistema em linguagem C para controle de produtos, alunos e vendas
 ├── produto.c / produto.h   # Gerenciamento do catálogo de produtos
 ├── usuarios.c / usuarios.h # Cadastro e listagem de alunos
 ├── vendas.c / vendas.h     # Registro de vendas e controle de limite diário
-├── lista.c / lista.h       # Fila circular de reposição de produtos
+├── lista.c / lista.h       # Lista circular de reposição de produtos
 ├── README.md               # Este documento
 ```
 
@@ -83,8 +83,8 @@ cantina.exe
 ```
 
 #### 🟨 Lista de Alunos
-- **Tipo**: Lista Linear Estática
-- **Justificativa**: Simples de implementar, ideal para protótipos. Pode ser substituída por vetor dinâmico em versões futuras.
+- **Tipo**: Lista Linear Dinâmica (vetor com realloc)
+- **Justificativa**: Permite crescimento sob demanda. Ideal para acesso sequencial e listagem completa.
 ```
 [ Aluno 1 ] -> [ Aluno 2 ] -> ... -> [ Aluno N ]
 ```
