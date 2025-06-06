@@ -5,6 +5,8 @@
 #include "produto.h"
 #include "lista.h"
 
+// Maria Fernanda Zandona 
+
 CatalogoProdutos* iniciarCatalogo() {
     // aloca na memoria um novo catalogo de produtos
     CatalogoProdutos* novoCatalogo = (CatalogoProdutos*) malloc(sizeof(CatalogoProdutos));
