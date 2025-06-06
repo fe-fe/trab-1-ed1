@@ -4,6 +4,8 @@
 
 #include "usuarios.h"
 
+// João Vítor Kretzschmar
+
 // Inicializa a lista de alunos
 void iniciarListaAlunos(ListaAlunos* listaAlunos) {
     listaAlunos->quantidade = 0;
