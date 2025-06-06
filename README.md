@@ -110,13 +110,13 @@ cantina.exe
 
 ```
 +--------------------------+
-|       Aluno (static)     |
+|      Aluno (dinâmico)    |
 | Nome | Matrícula         |
 +--------------------------+
             |
             v
 +--------------------------+
-|     Venda (static)       |
+|     Venda (dinâmico)     |
 | Mat. | Cod.Produto | Qtd |
 +--------------------------+
             |
@@ -128,7 +128,7 @@ cantina.exe
             |
             v
 +--------------------------+
-|   Fila Circular (repos)  |
+|  Lista Circular (repos)  |
 +--------------------------+
 ```
 
