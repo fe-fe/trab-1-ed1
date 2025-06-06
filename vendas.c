@@ -1,10 +1,28 @@
 #include <stdio.h>
 #include "vendas.h"
 #include "lista.h"
+#include <stdlib.h>
 
 // Inicia o controle de vendas
 void iniciarControleVendas(ControleVendas* controle) {
     controle->totalVendas = 0;
+    controle->capacidade = MAX_VENDAS; // capacidade inicial
+    controle->historico = malloc(controle->capacidade * sizeof(Venda));
+    if (!controle->historico) {
+        printf("Erro ao alocar memoria para o historico de vendas.\n");
+        exit(1);
+    }
+}
+
+void realocarHistoricoVendas(ControleVendas* controle) {
+    controle->capacidade *= 2; // dobra a capacidade
+    Venda* novo = realloc(controle->historico, controle->capacidade * sizeof(Venda));
+    if (!novo) {
+        printf("Erro ao realocar memoria para o historico de vendas.\n");
+        free(controle->historico);
+        exit(1);
+    }
+    controle->historico = novo;
 }
 
 // Verifica quantos itens o aluno comprou hoje
@@ -45,6 +63,10 @@ int registrarVenda(
         }
     }
 
+    if (controle->totalVendas >= controle->capacidade) {
+        realocarHistoricoVendas(controle);
+    }
+
     produto->estoque -= quantidade;
 
     if (produto->estoque < 10) {
@@ -80,4 +102,11 @@ void relatorioVendasAluno(ControleVendas* controle, ListaAlunos* alunos, int mat
         }
     }
 
+}
+
+void liberarControleVendas(ControleVendas* controle) {
+    free(controle->historico);
+    controle->historico = NULL;
+    controle->totalVendas = 0;
+    controle->capacidade = 0;
 }
