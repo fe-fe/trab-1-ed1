@@ -4,6 +4,8 @@
 #include "vendas.h"
 #include "lista.h"
 
+// Pedro Eduardo Dall Agnol
+
 // Inicia o controle de vendas
 void iniciarControleVendas(ControleVendas* controle) {
     controle->totalVendas = 0;
