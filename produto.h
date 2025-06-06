@@ -5,6 +5,8 @@
 
 #include "lista.h"
 
+// Maria Fernanda Zandona 
+
 typedef enum  {
     FRUTA,
     DOCE,
