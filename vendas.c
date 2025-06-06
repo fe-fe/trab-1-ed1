@@ -43,6 +43,15 @@ int registrarVenda(
     ControleVendas* controle, ListaAlunos* alunos, CatalogoProdutos* catalogo, 
     ListaReposicao* listaRep, int matricula, int codigoProduto, int quantidade
 ) {
+
+    if (controle->totalVendas >= controle->capacidade) {
+        if (!realocarHistoricoVendas(controle)) {
+            printf("Nao foi possivel realocar o controle de vendas.\n");
+            return 0;
+        }
+        
+    }
+
     Aluno* aluno = buscarAluno(alunos, matricula);
     Produto* produto = buscarProduto(catalogo, codigoProduto);
 
@@ -63,13 +72,6 @@ int registrarVenda(
             printf("Produto Adicionado a Lista de Reposicao.\n");
             inserirProdutoReposicao(listaRep, codigoProduto, produto->nome);
         }
-    }
-
-    if (controle->totalVendas >= controle->capacidade) {
-        if (!realocarHistoricoVendas(controle)) {
-            printf("Nao foi possivel realocar o controle de vendas.\n");
-        }
-        
     }
 
     produto->estoque -= quantidade;
