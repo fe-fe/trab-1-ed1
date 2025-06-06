@@ -5,6 +5,8 @@
 #include "usuarios.h"
 #include "lista.h"
 
+// Pedro Eduardo Dall Agnol
+
 #define MAX_VENDAS 500
 
 typedef struct {
