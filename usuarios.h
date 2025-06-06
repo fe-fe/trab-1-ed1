@@ -1,7 +1,7 @@
 #ifndef USUARIOS_H
 #define USUARIOS_H
 
-#define MAX_USUARIOS 100
+#define MAX_USUARIOS 200
 
 typedef struct {
     char nome[100];
@@ -9,20 +9,25 @@ typedef struct {
 } Aluno;
 
 typedef struct {
-    Aluno lista[MAX_USUARIOS];
+    Aluno* alunos;
     int quantidade;
+    int capacidade;
 } ListaAlunos;
 
 // Inicializa a lista de alunos
-void iniciarListaAlunos(ListaAlunos* lista);
+void iniciarListaAlunos(ListaAlunos* listaAlunos);
 
 // Cadastra um novo aluno
-int cadastrarAluno(ListaAlunos* lista, char* nome, int matricula);
+int cadastrarAluno(ListaAlunos* listaAlunos, char* nome, int matricula);
 
 // Busca um aluno pela matrícula
-Aluno* buscarAluno(ListaAlunos* lista, int matricula);
+Aluno* buscarAluno(ListaAlunos* listaAlunos, int matricula);
 
 // Mostra todos os alunos
-void listarAlunos(ListaAlunos* lista);
+void listarAlunos(ListaAlunos* listaAlunos);
+
+void liberarListaAlunos(ListaAlunos* listaAlunos);
+
+int realocarListaAlunos(ListaAlunos* listaAlunos);
 
 #endif

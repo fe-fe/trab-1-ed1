@@ -26,7 +26,7 @@ void iniciarControleVendas(ControleVendas* controle);
 int itensCompradosHoje(ControleVendas* controle, int matricula);
 
 // aumenta a capacidade do historio de vendas
-void realocarHistoricoVendas(ControleVendas* controle);
+int realocarHistoricoVendas(ControleVendas* controle);
 
 // Registra uma venda, atualiza estoque e insere na fila se necessário
 int registrarVenda(
