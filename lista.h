@@ -1,6 +1,8 @@
 #ifndef LISTA_CIRCULAR_H
 #define LISTA_CIRCULAR_H
 
+// Gabriela Harres Rodrigues 
+
 // Estrutura do nó
 typedef struct NoRep {
     int codigo;
