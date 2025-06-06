@@ -65,9 +65,9 @@ cantina.exe
 - ✅ Cadastro de alunos com nome e matrícula.
 - ✅ Registro de vendas com verificação de limite diário (máx. 5 itens).
 - ✅ Atualização automática de estoque.
-- ✅ Inserção de produtos esgotados na fila de reposição.
+- ✅ Inserção de produtos com baixo estoque (menos que 10 unidades) na fila de reposição.
 - ✅ Relatórios de vendas por aluno.
-- ✅ Exibição da fila circular de reposição.
+- ✅ Exibição da lista circular de reposição.
 
 ---
 
@@ -101,8 +101,8 @@ cantina.exe
 ```
 
 #### 🟧 Histórico de Vendas
-- **Tipo**: Lista Linear Estática
-- **Justificativa**: Estrutura simples para registros cronológicos. Não requer remoção ou ordenação. Ideal para simulações.
+- **Tipo**: Lista Linear Dinamica
+- **Justificativa**: Permite crescimento sob demanda. Ideal para acesso sequencial e listagem completa.
 
 ---
 
@@ -146,9 +146,7 @@ cantina.exe
 
 ## 💬 Comentários e Experiência do Grupo
 
-> O desenvolvimento do projeto proporcionou uma vivência prática com os principais tipos de listas lineares e seus usos em sistemas reais. Enfrentamos desafios na modularização e gerenciamento de memória dinâmica, especialmente ao lidar com ponteiros e filas circulares.
-
-> Entendemos que listas estáticas são úteis para prototipagem, mas optamos por usar estruturas dinâmicas nos casos em que flexibilidade era crucial (como no catálogo de produtos).
+> O desenvolvimento do projeto proporcionou uma vivência prática com os principais tipos de listas lineares e seus usos em sistemas reais. Enfrentamos desafios na modularização e gerenciamento de memória dinâmica, especialmente ao lidar com ponteiros e listas circulares.
 
 > A simulação de um sistema real, com múltiplos arquivos e integração entre módulos, nos ajudou a consolidar a importância da organização do código, da separação de responsabilidades e da documentação clara.
 
@@ -158,7 +156,7 @@ cantina.exe
 
 Este projeto reforçou o aprendizado dos seguintes pontos:
 
-- Implementação e aplicação de **listas lineares** (estáticas e dinâmicas).
+- Implementação e aplicação de **listas lineares dinâmicas**
 - Uso de **listas circulares encadeadas** em contextos de fila.
 - Modularização e clareza de código.
 - Integração de múltiplas estruturas de dados para resolver um problema prático realista.
