@@ -3,6 +3,8 @@
 
 #define MAX_USUARIOS 200
 
+// Grupo Geral.
+
 typedef struct {
     char nome[100];
     int matricula;
