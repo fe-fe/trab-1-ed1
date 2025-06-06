@@ -6,6 +6,12 @@
 #include "vendas.h"
 #include "lista.h"
 
+// Maria Fernanda Zandona Casagrande 		— GRR20241727
+// Pedro Eduardo Dall’ Agnol				— GRR20240844
+// Gabriela Harres Rodrigues			— GRR20246215
+// João Vítor Kretzschmar				— GRR20240632
+
+
 
 int main() {
     // Inicializações
