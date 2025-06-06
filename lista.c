@@ -4,6 +4,9 @@
 
 #include "lista.h"
 
+// Gabriela Harres Rodrigues 
+
+
 void iniciarListaReposicao(ListaReposicao* lista) {
     lista->fim = NULL;
 }
